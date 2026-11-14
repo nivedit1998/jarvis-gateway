@@ -1,0 +1,68 @@
+{
+  "status": "synthetic local-adapter fixture, not frozen wire format",
+  "steps": [
+    {
+      "route": "/turns/submit",
+      "body": {
+        "session": "00000000-0000-4000-8000-000000000001",
+        "turn_id": "00000000-0000-4000-8000-000000000002",
+        "request_id": "00000000-0000-4000-8000-000000000010",
+        "supersedes": null,
+        "revision": 0,
+        "namespace": "personal",
+        "segments": [
+          {
+            "text": "Pick the BLUE sample.",
+            "revision": 0,
+            "interrupted_jarvis": false
+          }
+        ]
+      }
+    },
+    {
+      "route": "/turns/interrupt",
+      "body": {
+        "session": "00000000-0000-4000-8000-000000000001",
+        "turn_id": "00000000-0000-4000-8000-000000000002",
+        "request_id": "00000000-0000-4000-8000-000000000010"
+      }
+    },
+    {
+      "route": "/turns/submit",
+      "body": {
+        "session": "00000000-0000-4000-8000-000000000001",
+        "turn_id": "00000000-0000-4000-8000-000000000002",
+        "request_id": "00000000-0000-4000-8000-000000000011",
+        "supersedes": "00000000-0000-4000-8000-000000000010",
+        "revision": 1,
+        "namespace": "personal",
+        "segments": [
+          {
+            "text": "Pick the BLUE sample.",
+            "revision": 0,
+            "interrupted_jarvis": false
+          },
+          {
+            "text": "Actually choose GREEN instead.",
+            "revision": 1,
+            "interrupted_jarvis": true
+          }
+        ],
+        "interruptions": [
+          {
+            "request_id": "00000000-0000-4000-8000-000000000010",
+            "spoken_text": "",
+            "was_speaking": false
+          }
+        ]
+      }
+    }
+  ],
+  "expected_invariants": [
+    "latest-only content replay",
+    "same-turn slot replacement",
+    "GREEN is final intent",
+    "no canonical history before settlement",
+    "same request retry does not rerun inference"
+  ]
+}
