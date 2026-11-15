@@ -1,0 +1,41 @@
+{
+  "status": "synthetic expectations; future network errors require schema freeze",
+  "cases": [
+    {
+      "case": "same_id_changed_content",
+      "local_error": "idempotency_conflict"
+    },
+    {
+      "case": "revision_older_than_latest",
+      "local_error": "stale_revision"
+    },
+    {
+      "case": "wrong_predecessor",
+      "local_error": "supersession_conflict"
+    },
+    {
+      "case": "invented_spoken_text",
+      "local_error": "invalid_spoken_prefix"
+    },
+    {
+      "case": "replay_gap",
+      "result": "resync_required"
+    },
+    {
+      "case": "forgotten_turn_recreated",
+      "local_error": "forgotten_turn"
+    },
+    {
+      "case": "crypto_downgrade",
+      "status": "required future test; no implemented crypto vector"
+    },
+    {
+      "case": "expired_auth",
+      "status": "required future wire fixture; no public auth implementation"
+    },
+    {
+      "case": "redaction_gap",
+      "status": "purge/full-resync required; public history protocol pending"
+    }
+  ]
+}

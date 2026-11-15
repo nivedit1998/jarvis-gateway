@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:jarvis:protocol-envelope:0.1-draft",
+  "title": "Jarvis proposed event envelope \u2014 not an implemented contract",
+  "description": "Planning only. Payload-specific schemas and cryptographic/authentication bindings are not defined by this envelope. Unknown event types require capability negotiation.",
+  "type": "object",
+  "required": [
+    "v",
+    "type",
+    "session",
+    "seq",
+    "ts",
+    "encryption_mode",
+    "payload"
+  ],
+  "properties": {
+    "v": {
+      "const": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "message.accepted",
+        "message.queued",
+        "message.delta",
+        "message.final",
+        "message.failed",
+        "message.cancelled",
+        "status.update",
+        "session.resync",
+        "redaction",
+        "approval.request",
+        "approval.resolved"
+      ]
+    },
+    "session": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "encryption_mode": {
+      "enum": [
+        "tls-only",
+        "e2e-v1"
+      ],
+      "description": "Reserved labels. No e2e construction is specified or implemented; no silent downgrade allowed."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Opaque ciphertext container for future E2E, typed message payload for an explicitly TLS-only prototype. Payload schemas are pending."
+    }
+  },
+  "additionalProperties": true
+}
