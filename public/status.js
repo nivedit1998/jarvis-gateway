@@ -13,7 +13,7 @@ async function check() {
     if (health.service !== 'jarvis-gateway' || health.status !== 'ok') throw new Error('unexpected response');
     badge.textContent = 'Online'; badge.classList.remove('muted');
     detail.textContent = 'This deployment is responding.';
-    note.textContent = `Checked at ${new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}. The home connection is not configured yet.`;
+    note.textContent = `Checked at ${new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}. Check home connectivity in the paired iPhone app.`;
   } catch {
     badge.textContent = 'Check failed'; badge.classList.add('muted');
     detail.textContent = 'Could not verify the gateway. Try again.';
