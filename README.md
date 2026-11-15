@@ -1,12 +1,17 @@
-# jarvis-gateway
+# Jarvis Gateway
 
-Vercel cloud gateway for Jarvis, Nivedit Gupta's local COO/personal assistant.
+Public connection foundation for a private, locally hosted assistant. Core and memory remain on Ubuntu.
 
-Status: repository foundation only. No app, public API or production deployment yet.
-Initial owner: Codex. Read AGENTS.md and docs/PLAN.md before changes.
+## First deployment
 
-Workspace: /Users/niveditgupta/Documents/Jarvis/Jarvis Gateway
-Canonical context: https://app.notion.com/p/418c43feeb3d81109967f5613c182cf2
+Node 22 functions and a static status page, with no external dependencies or required environment variables.
 
-Independent of Dinodia Smart Living development/deployment configuration. Core stays on Ubuntu.
-No secrets or runtime knowledge belong in this repository.
+- `/api/health`: Gateway health only; does not imply the home AI is connected.
+- `/api/capabilities`: explicit available and pending capabilities.
+- `/api/v1/*`: returns `503 connection_not_configured`; no conversation relay is implemented.
+
+Pairing, authenticated sessions, E2E encryption, Ubuntu transport, interruption delivery and notifications are pending. Do not connect real conversation content to this foundation. The draft protocol in `docs/` is not an implemented security contract.
+
+Run `npm test`, `npm run build`, or `npm run dev` (localhost:3000). Vercel imports this repository with the Other preset, root directory `./`, and the checked-in `vercel.json`. Link GitHub main as production; feature branches are previews subject to project settings. A local commit alone never deploys.
+
+Manage Vercel only through Chrome, never its CLI. This environment is separate from Dinodia Smart Living. No credentials, runtime knowledge, conversation exports or machine addresses belong in this public repository.
