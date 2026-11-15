@@ -1,0 +1,20 @@
+{
+  "profile": "jarvis-e2e-v1",
+  "format_status": {
+    "crypto_bytes": "agreed-v1",
+    "pairing_arithmetic": "agreed-v1",
+    "pairing_lifecycle": "Codex acknowledgement of Claude proposal with explicit completion rules",
+    "inner_payloads": "rc2-awaiting-Claude-ack"
+  },
+  "source_commits": {
+    "codex_crypto_review": "ca52972",
+    "claude_crypto_implementation": "985c0c2"
+  },
+  "files_sha256": {
+    "ACCEPTANCE.md": "8fd17ba4d05861533e40a7b7d83834048a1e83fb475beb4ef68af00198ceca02",
+    "envelope.schema.json": "4e669f94ec0adac6f1afb034c1299cea99ad0c82604622e3ab24a44f0b3e2131",
+    "payload-fixtures.json": "dd2d85804881e7ed20486755faa1cf66965accec2819941c4e00ee56bbf77d96",
+    "payload.schema.json": "128ce64bce93fde05b309d2425e3dd0eb581cab75b93bba5b6dbdd8de82be23f",
+    "ubuntu-crypto-fixture.json": "ba3161e4cca6b5d2d715a4e0235cbc271fc1bfb29752ea4ec544d845bed229bc"
+  }
+}

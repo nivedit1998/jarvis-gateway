@@ -1,0 +1,363 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:jarvis:e2e:v1:payload:rc2",
+  "title": "M1 inner payload release candidate 2; see acceptance document",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "submit"
+        },
+        "session": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "turn_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "supersedes": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 256
+        },
+        "namespace": {
+          "enum": [
+            "dinodia",
+            "personal",
+            "system"
+          ]
+        },
+        "segments": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 6000
+              },
+              "revision": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 256
+              },
+              "interrupted_jarvis": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "text",
+              "revision",
+              "interrupted_jarvis"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "interruptions": {
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "type": "object",
+            "properties": {
+              "request_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "spoken_text": {
+                "type": "string",
+                "maxLength": 6000
+              },
+              "was_speaking": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "request_id",
+              "spoken_text",
+              "was_speaking"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "session",
+        "turn_id",
+        "request_id",
+        "revision",
+        "namespace",
+        "segments",
+        "interruptions"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "revision": {
+                "minimum": 1
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "supersedes"
+            ],
+            "properties": {
+              "supersedes": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "supersedes": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "interrupt"
+        },
+        "session": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "turn_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "kind",
+        "session",
+        "turn_id",
+        "request_id"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "settle"
+        },
+        "session": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "turn_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 256
+        },
+        "delivered_text": {
+          "type": "string"
+        },
+        "delivery": {
+          "enum": [
+            "spoken",
+            "displayed"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "session",
+        "turn_id",
+        "request_id",
+        "revision",
+        "delivered_text",
+        "delivery"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "accepted"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "kind",
+        "request_id"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "sentence"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "request_id",
+        "index",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "final"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "request_id",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "failed"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^[a-z_]{1,64}$"
+        }
+      },
+      "required": [
+        "kind",
+        "request_id",
+        "code"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "settled"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "kind",
+        "request_id"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "interrupted"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "compute_stop": {
+          "enum": [
+            "requested",
+            "suppressed_before_submit"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "request_id",
+        "compute_stop"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}
