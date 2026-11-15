@@ -1,0 +1,94 @@
+{
+  "note": "Synthetic VALID payload fixtures; unlike crypto plaintext samples, these can reach the adapter.",
+  "submit": {
+    "kind": "submit",
+    "session": "fixture-session",
+    "turn_id": "fixture-turn",
+    "request_id": "fixture-r0",
+    "supersedes": null,
+    "revision": 0,
+    "namespace": "system",
+    "segments": [
+      {
+        "text": "hey",
+        "revision": 0,
+        "interrupted_jarvis": false
+      }
+    ],
+    "interruptions": []
+  },
+  "interrupt": {
+    "kind": "interrupt",
+    "session": "fixture-session",
+    "turn_id": "fixture-turn",
+    "request_id": "fixture-r0"
+  },
+  "settle": {
+    "kind": "settle",
+    "session": "fixture-session",
+    "turn_id": "fixture-turn",
+    "request_id": "fixture-r1",
+    "revision": 1,
+    "delivered_text": "Hello!",
+    "delivery": "displayed"
+  },
+  "events": [
+    {
+      "kind": "accepted",
+      "request_id": "fixture-r1"
+    },
+    {
+      "kind": "sentence",
+      "request_id": "fixture-r1",
+      "index": 0,
+      "text": "Hello!"
+    },
+    {
+      "kind": "final",
+      "request_id": "fixture-r1",
+      "text": "Hello!"
+    },
+    {
+      "kind": "interrupted",
+      "request_id": "fixture-r0",
+      "compute_stop": "requested"
+    },
+    {
+      "kind": "settled",
+      "request_id": "fixture-r1"
+    },
+    {
+      "kind": "failed",
+      "request_id": "fixture-r1",
+      "code": "generation_failed"
+    }
+  ],
+  "revision": {
+    "kind": "submit",
+    "session": "fixture-session",
+    "turn_id": "fixture-turn",
+    "request_id": "fixture-r1",
+    "supersedes": "fixture-r0",
+    "revision": 1,
+    "namespace": "system",
+    "segments": [
+      {
+        "text": "hey",
+        "revision": 0,
+        "interrupted_jarvis": false
+      },
+      {
+        "text": "Actually say hello briefly.",
+        "revision": 1,
+        "interrupted_jarvis": true
+      }
+    ],
+    "interruptions": [
+      {
+        "request_id": "fixture-r0",
+        "spoken_text": "",
+        "was_speaking": false
+      }
+    ]
+  }
+}
